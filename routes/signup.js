@@ -1,8 +1,8 @@
 import express from "express";
-import signupmodel from "./models/Signup.js";
-const app = express();
+import signupmodel from "../models/Signup.js";
+const router = express.Router();
 
-app.post("/signup", async (req, res) => {
+router.post("/signup", async (req, res) => {
   //for signup
   try {
     const { email, password } = req.body;
@@ -17,3 +17,5 @@ app.post("/signup", async (req, res) => {
     console.log("Error in inserting");
   }
 });
+
+export default router;
