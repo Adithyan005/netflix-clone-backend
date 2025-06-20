@@ -49,15 +49,9 @@ router.get("/bbmovies", async (req, res) => {
 
 router.get("/bbmovies/:id", async (req, res) => {
   const id = req.params.id;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: "Invalid movie ID" });
-  }
-  
+
   try {
-    const movie = await blockbuster_model.findById(id);
-    if (!movie) {
-      return res.status(404).json({ error: "Movie not found" });
-    }
+    const movie = await blockbuster_model.findOne({ _id: id });
 
     res.status(200).json(movie);
     console.log(movie);
