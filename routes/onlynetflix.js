@@ -27,4 +27,17 @@ router.get("/onlyonnetflix", async (req,res) => {
     }
 })
 
+router.get("/onlyonnetflix/:id",async (req,res) => {
+    const id=req.params.id;
+    try {
+        const fetched_movie = await netflixmodel.findOne({_id: id});
+        res.status(200).json(fetched_movie)
+        console.log(fetched_movie)
+    } catch (error) {
+        console.log(error)
+        console.log("error fetching movie")
+        
+    }
+})
+
 export default router;
