@@ -1,31 +1,10 @@
-// import express from "express";
-// import signupmodel from "../models/Signup.js";
-// const router = express.Router();
-
-// router.post("/signup", async (req, res) => {
-//   //for signup
-//   try {
-//     const { email, password } = req.body;
-//     const signup = new signupmodel({
-//       email,
-//       password,
-//     });
-//     await signup.save();
-//     console.log(signup);
-//     res.status(200).json({ message: "Successfully inserted" });
-//   } catch (error) {
-//     console.log("Error in inserting");
-//   }
-// });
-
-// export default router;
-
 import express from "express";
 import signupmodel from "../models/Signup.js";
 import bcrypt from "bcryptjs";
 
 const router = express.Router();
 
+// Signup route
 router.post("/signup", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -41,10 +20,10 @@ router.post("/signup", async (req, res) => {
       return res.status(409).json({ success: false, message: "User already exists" });
     }
 
-    // Hash password
+    // Hash password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create new user
+    // Save new user
     const newUser = new signupmodel({ email, password: hashedPassword });
     await newUser.save();
 
