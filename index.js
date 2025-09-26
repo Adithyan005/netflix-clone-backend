@@ -18,6 +18,11 @@ app.use(express.json());
 connectDB();
 const port = process.env.PORT || 4000;
 
+const corsOptions = {
+  origin: 'https://thetrailerbox.netlify.app',
+  optionsSuccessStatus: 200 // For legacy browser support
+};
+
 app.use("/api/home",homeroute);
 app.use("/api/buster",blockbuster);
 app.use("/api/auth",loginroute);
